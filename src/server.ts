@@ -5,6 +5,7 @@ import app from "./app";
 import employeeRoutes from "../src/routes/employeeRoutes";
 import logger from "./middleware/logger";
 import { authenticateJWT } from "./middleware/auth.middleware";
+import { loginEmployee } from "./controllers/employeesController";
 
 const port = config.serverPORT || 3000;
 
@@ -16,11 +17,19 @@ app.use(cors({ credentials: true }));
 
 //Logger middleware
 app.use(logger);
-app.use(authenticateJWT);
+
 
 app.use("/api/employees", employeeRoutes);
 
 //authenticate JWT
+app.use(authenticateJWT);
+
+
+
+
+
+//authenticate JWT
+// app.use(authenticateJWT);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -14,7 +14,7 @@ export const allEmployeesModel = async (
         const searchterm = `%${search}%`
 
 
-        const query = `SELECT * FROM employees`;
+        const query = `SELECT * FROM employee`;
 
         const values = [
             searchterm

@@ -14,7 +14,7 @@ export interface Employees {
   email: string;
   password: string;
   phone: number;
-  department_id?: string;
+  department?: string;
   photo?: string;
   address?: string;
   created_at?: string;
@@ -50,18 +50,18 @@ export const getEmp = app.get("/", async (req, res) => {
 
 export const createEmployee = async (req: Request, res: Response) => {
   try {
-    const { name, email, password, phone, department_id } =
+    const { name, email, password, phone, department } =
       req.body as Employees;
 
     console.log(req.body);
 
-    if (!name || !email || !password || !phone || !department_id) {
+    if (!name || !email || !password || !phone || !department) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
     const [result] = await pool.execute(
-      `INSERT INTO employees(name, email, phone, password, department_id) VALUES (?, ?, ?, ?, ?)`,
-      [name, email, phone, password, department_id]
+      `INSERT INTO employee(name, email, phone, password, department) VALUES (?, ?, ?, ?, ?)`,
+      [name, email, phone, password, department]
     );
 
     const newEmployeeId = (result as any).newEmployeeId;
@@ -117,7 +117,7 @@ export const loginEmployee = async (req: Request, res: Response) => {
 
   try {
     const [rows]: QueryResult = await pool.execute(
-      `SELECT id, name, phone, password, email FROM employees WHERE email = ? AND password = ? `,
+      `SELECT id, name, phone, password, email FROM employee WHERE email = ? AND password = ? `,
       [email, password]
     );
 

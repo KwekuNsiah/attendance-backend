@@ -19,7 +19,7 @@ export const authenticateJWT = async (
   const autHeader = req.headers.authorization;
 
   if (autHeader) {
-    const token = autHeader.split("")[1];
+    const token = autHeader.split(" ")[1];
 
     const secret = process.env.JWT_SECRET;
     console.log("token :>> ", token);

@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 router.get("/", showAllEmployees);
-router.post("/", createEmployee);
+router.post("/create", createEmployee);
 router.post("/login", loginEmployee);
 //Get a Single employee
 router.put("/:id", getEmployee);
